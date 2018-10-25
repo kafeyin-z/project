@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'django_extensions',
+    'crispy_forms',
     'app_product',
 ]
 
@@ -142,3 +143,6 @@ DEBUG_TOOLBAR_PANELS = [
 ]
 
 INTERNAL_IPS = ('127.0.0.1')
+
+# Crispy Form
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
