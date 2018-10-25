@@ -1,0 +1,10 @@
+.idea/
+.vscode/
+__pycache__/
+media/*
+static_root/*
+*/migrations/0*.*
+db.sqlite3
+*.log
+*.pot
+*.pyc
