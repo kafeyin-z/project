@@ -22,10 +22,10 @@ def listele(request):
 
 
 def guncelle(request, pk):
-    data = Product.objects.get(pk=pk)
+    data = get_object_or_404(Product, pk=pk)
     form = ProductForms(instance=data)
     if request.method == 'POST':
-        form = ProductForms(data=request.POST, files=request.FILES)
+        form = ProductForms(instance=data, data=request.POST, files=request.FILES)
         if form.is_valid():
             post = form.save()
             return HttpResponseRedirect(reverse('product-detay', kwargs={'pk': post.pk}))
