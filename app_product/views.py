@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
+from django.contrib import messages
 from .models import Product
 from .forms import ProductForms
 
@@ -10,6 +11,7 @@ def ekle(request):
         form = ProductForms(data=request.POST, files=request.FILES)
         if form.is_valid():
             post = form.save()
+            messages.success(request, "İlanınız başarıyla oluşturuldu.")
             return HttpResponseRedirect(reverse('product-detay', kwargs={'pk': post.pk}))
     context = {'form': form}
     return render(request, 'product/ekle-guncelle.html', context=context)
@@ -28,6 +30,7 @@ def guncelle(request, pk):
         form = ProductForms(instance=data, data=request.POST, files=request.FILES)
         if form.is_valid():
             post = form.save()
+            messages.success(request, "İlanınız başarıyla güncelleştirildi.")
             return HttpResponseRedirect(reverse('product-detay', kwargs={'pk': post.pk}))
     context = {'form': form}
     return render(request, 'product/ekle-guncelle.html', context=context)
@@ -36,6 +39,7 @@ def guncelle(request, pk):
 def sil(request, pk):
     post = get_object_or_404(Product, pk=pk)
     post.delete()
+    messages.warning(request, "İlanınız silindi.")
     return HttpResponseRedirect(reverse('product-listele'))
 
 

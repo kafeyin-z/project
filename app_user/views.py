@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
+from django.contrib import messages
 from .forms import GirisForm, KayitForm
 
 
@@ -13,6 +14,7 @@ def giris(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            messages.success(request, "Tebrikler başarıyla giriş yaptınız.")
             return HttpResponseRedirect(reverse('product-listele'))
         else:
             context = {'form': form}
@@ -21,6 +23,7 @@ def giris(request):
 
 def cikis(request):
     logout(request)
+    messages.warning(request, "Sistemden çıkış yapıldı.")
     return HttpResponseRedirect(reverse('product-listele'))
 
 # TODO: Kullanıcı adı email olarak düzenlenecek, username olarak görünen yerler Ad Soyad şeklinde düzenlenecek.
@@ -36,6 +39,7 @@ def kayit(request):
         newuser.save()
 
         login(request, newuser)
+        messages.success(request, "Tebrikler başarıyla üyelik kaydınız oluşturuldu.")
         return HttpResponseRedirect(reverse('product-listele'))
     context = {'form': form}
     return render(request, 'user/kayit.html', context=context)

@@ -16,7 +16,7 @@
         </tr>
         {% for post in posts %}
             <tr>
-                <td>{{ post.id }}</td>
+                <td><a href="{% url 'product-detay' post.pk %}">{{ post.pk }}</a></td>
                 <td>{{ post.title }}</td>
                 <td>{{ post.content }}</td>
                 <td>{{ post.get_image }}</td>
