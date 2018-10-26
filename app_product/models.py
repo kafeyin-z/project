@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class Product(models.Model):
     title = models.CharField(null=True, blank=False, max_length=100)
@@ -9,6 +9,7 @@ class Product(models.Model):
     update_date = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=False)
     outline = models.BooleanField(default=False)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     # Template de kullanımı {{ post.get_image }}
     def get_image(self):

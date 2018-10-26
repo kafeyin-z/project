@@ -13,6 +13,7 @@
             <th>update date</th>
             <th>active</th>
             <th>outline</th>
+            <th>user</th>
         </tr>
         {% for post in posts %}
             <tr>
@@ -24,6 +25,7 @@
                 <td>{{ post.update_date }}</td>
                 <td>{{ post.active }}</td>
                 <td>{{ post.outline }}</td>
+                <td>{{ post.author }}</td>
             </tr>
         {% empty %}
             Kayıtlı öğe bulunamadı.
