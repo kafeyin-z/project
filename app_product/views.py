@@ -47,3 +47,7 @@ def detay(request, pk):
     post = get_object_or_404(Product, pk=pk)
     context = {'post': post}
     return render(request, 'product/detay.html', context=context)
+
+
+def anasayfa(request):
+    return render(request, 'anasayfa.html')

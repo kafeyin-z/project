@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from app_product.views import anasayfa
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('product/', include('app_product.urls')),
     path('user/', include('app_user.urls')),
+    path('', anasayfa, name='anasayfa'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

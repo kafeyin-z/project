@@ -12,6 +12,8 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+{% include 'inc/navbar.html' %}
+
 {% if messages %}
     <div>
         {% for message in messages %}

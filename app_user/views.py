@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout, authenticate, get_user
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import GirisForm, KayitForm
@@ -26,6 +26,7 @@ def cikis(request):
     messages.warning(request, "Sistemden çıkış yapıldı.")
     return HttpResponseRedirect(reverse('product-listele'))
 
+
 # TODO: Kullanıcı adı email olarak düzenlenecek, username olarak görünen yerler Ad Soyad şeklinde düzenlenecek.
 # FIXME: Giriş yapmış kullanıcı kayıt sayfasından tekrar kayıt yaptırabiliyor
 def kayit(request):
@@ -43,3 +44,12 @@ def kayit(request):
         return HttpResponseRedirect(reverse('product-listele'))
     context = {'form': form}
     return render(request, 'user/kayit.html', context=context)
+
+
+def profil(request):
+    user_auth = get_user(request)
+    if user_auth.is_authenticated:
+        messages.success(request, "Kullanıcı giriş yapmış.")
+    else:
+        messages.success(request, "Giriş yapılmamamış.")
+    return render(request, 'anasayfa.html')
