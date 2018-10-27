@@ -10,9 +10,11 @@ def ekle(request):
     if request.method == 'POST':
         form = ProductForms(data=request.POST, files=request.FILES)
         if form.is_valid():
-            post = form.save()
+            post_pre_commit = form.save(commit=False)
+            post_pre_commit.author = request.user
+            post_commit = post_pre_commit.save()
             messages.success(request, "İlanınız başarıyla oluşturuldu.")
-            return HttpResponseRedirect(reverse('product-detay', kwargs={'pk': post.pk}))
+            return HttpResponseRedirect(reverse('product-detay', kwargs={'pk': post_pre_commit.pk}))
     context = {'form': form}
     return render(request, 'product/ekle-guncelle.html', context=context)
 
@@ -29,9 +31,11 @@ def guncelle(request, pk):
     if request.method == 'POST':
         form = ProductForms(instance=data, data=request.POST, files=request.FILES)
         if form.is_valid():
-            post = form.save()
+            post_pre_commit = form.save(commit=False)
+            post_pre_commit.author = request.user
+            post_commit = post_pre_commit.save()
             messages.success(request, "İlanınız başarıyla güncelleştirildi.")
-            return HttpResponseRedirect(reverse('product-detay', kwargs={'pk': post.pk}))
+            return HttpResponseRedirect(reverse('product-detay', kwargs={'pk': post_pre_commit.pk}))
     context = {'form': form}
     return render(request, 'product/ekle-guncelle.html', context=context)
 
