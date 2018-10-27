@@ -1,7 +1,8 @@
-from django.shortcuts import render, HttpResponseRedirect, reverse
+from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate, get_user
 from django.contrib.auth.models import User
-from django.contrib import messages
+from django.shortcuts import render, HttpResponseRedirect, reverse
+
 from .forms import GirisForm, KayitForm
 
 
@@ -28,8 +29,11 @@ def cikis(request):
 
 
 # TODO: Kullanıcı adı email olarak düzenlenecek, username olarak görünen yerler Ad Soyad şeklinde düzenlenecek.
-# FIXME: Giriş yapmış kullanıcı kayıt sayfasından tekrar kayıt yaptırabiliyor
 def kayit(request):
+    user_auth = get_user(request)
+    if user_auth.is_authenticated:
+        messages.success(request, "Giriş yapılmış durumda tekrar kayıt olamazsınız.")
+        return HttpResponseRedirect(reverse('anasayfa'))
     form = KayitForm(request.POST or None)
     if form.is_valid():
         username = form.cleaned_data.get('username')
