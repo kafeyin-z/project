@@ -147,3 +147,8 @@ INTERNAL_IPS = ('127.0.0.1')
 
 # Crispy Form
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# @login_required ayarları
+from django.urls import reverse_lazy
+
+LOGIN_URL = reverse_lazy('user-giris')
