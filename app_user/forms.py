@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from .models import UserProfile
 
 User = get_user_model()
 
@@ -31,3 +32,9 @@ class KayitForm(forms.Form):
             'password': password,
         }
         return values
+
+
+class ProfilForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['career', 'education', 'interests']

@@ -21,7 +21,7 @@
                 <td>{{ post.title }}</td>
                 <td>{{ post.content }}</td>
                 <td>{{ post.get_image }}</td>
-                <td>{{ post.created_date }}</td>
+                <td>{{ post.created_date|timesince }}</td>
                 <td>{{ post.update_date }}</td>
                 <td>{{ post.active }}</td>
                 <td>{{ post.outline }}</td>

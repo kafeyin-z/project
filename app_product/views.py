@@ -27,11 +27,17 @@ def listele(request):
     return render(request, 'product/listele.html', context=context)
 
 
-# FIXME: Güncellenecek post kaydeden kişi tarafından düzenlenebilecek şekilde ayarlanacak
 @login_required
 def guncelle(request, pk):
     data = get_object_or_404(Product, pk=pk)
     form = ProductForms(instance=data)
+
+    # Gönderi kullanıcıya ait mi -> kontrol et
+    if data.author != request.user:
+        messages.warning(request, "Bu gönderi size ait değil.")
+        return HttpResponseRedirect(reverse('anasayfa'))
+        # raise ValidationError("Bu gönderi size ait değil.")
+
     if request.method == 'POST':
         form = ProductForms(instance=data, data=request.POST, files=request.FILES)
         if form.is_valid():
@@ -47,6 +53,12 @@ def guncelle(request, pk):
 @login_required
 def sil(request, pk):
     post = get_object_or_404(Product, pk=pk)
+
+    # Gönderi kullanıcıya ait mi -> kontrol et
+    if post.author != request.user:
+        messages.warning(request, "Bu gönderi size ait değil.")
+        return HttpResponseRedirect(reverse('anasayfa'))
+
     post.delete()
     messages.warning(request, "İlanınız silindi.")
     return HttpResponseRedirect(reverse('product-listele'))

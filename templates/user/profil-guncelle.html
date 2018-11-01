@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ profil|crispy }}
+        <button type="submit">Gönder</button>
+    </form>
+
+{% endblock %}
