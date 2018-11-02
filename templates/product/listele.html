@@ -2,34 +2,44 @@
 
 
 {% block body %}
-
-    <table class="table table-hover">
-        <tr>
-            <th>id</th>
-            <th>title</th>
-            <th>content</th>
-            <th>images</th>
-            <th>created date</th>
-            <th>update date</th>
-            <th>active</th>
-            <th>outline</th>
-            <th>user</th>
-        </tr>
+    <div class="card p-5">
         {% for post in posts %}
-            <tr>
-                <td><a href="{% url 'product-detay' post.pk %}">{{ post.pk }}</a></td>
-                <td>{{ post.title }}</td>
-                <td>{{ post.content }}</td>
-                <td>{{ post.get_image }}</td>
-                <td>{{ post.created_date|timesince }}</td>
-                <td>{{ post.update_date }}</td>
-                <td>{{ post.active }}</td>
-                <td>{{ post.outline }}</td>
-                <td>{{ post.author }}</td>
-            </tr>
+            <article class="itemlist">
+                <div class="row row-sm">
+                    <aside class="col-sm-3">
+                        <div class="img-wrap"><img src="https://via.placeholder.com/160" class="img-md"></div>
+                    </aside> <!-- col.// -->
+                    <div class="col-sm-6">
+                        <div class="text-wrap">
+                            <h4 class="title">{{ post.title|truncatechars:39 }}</h4>
+                            <p>{{ post.content|truncatechars:185 }}</p>
+                            <p class="rating-wrap my-0 text-muted">
+                                <span class="label-rating"> {{ post.created_date }} </span>
+                                <span class="label-rating"> {{ post.author }} </span>
+                            </p> <!-- rating-wrap.// -->
+                        </div> <!-- text-wrap.// -->
+                    </div> <!-- col.// -->
+                    <aside class="col-sm-3">
+                        <div class="border-left pl-3">
+                            <div class="price-wrap">
+                                <span class="h3 price">Fiyat</span>
+                                <del class="price-old">Eski Fiyat</del>
+                            </div> <!-- info-price-detail // -->
+                            <p class="text-success">Kargo bilgisi</p>
+                            <p>
+                                <a href="#" class="btn btn-warning">Satın Al</a>
+                                <a href="{% url 'product-detay' post.pk %}" class="btn btn-light">Ayrıntılar</a></p>
+                        </div> <!-- action-wrap.// -->
+                    </aside> <!-- col.// -->
+                </div> <!-- row.// -->
+            </article> <!-- itemlist.// -->
+            <hr>
         {% empty %}
             Kayıtlı öğe bulunamadı.
         {% endfor %}
-    </table>
+    </div>
 
 {% endblock %}
+
+
+

@@ -2,13 +2,52 @@
 
 {% block body %}
 
-    {{ post.pk }}<br>
-    {{ post.title }}<br>
-    {{ post.content }}<br>
-    {{ post.images }}<br>
-    {{ post.created_date }}<br>
-    {{ post.update_date }}<br>
-    {{ post.active }}<br>
-    {{ post.outline }}<br>
+    <div class="card">
+        <div class="row no-gutters">
+            <aside class="col-sm-5 border-right">
+                <article class="gallery-wrap">
+                    <div class="img-big-wrap">
+                        <div><a href="{{ post.get_image }}" data-fancybox=""><img src="{{ post.get_image }}"></a></div>
+                    </div> <!-- slider-product.// -->
+                    <div class="img-small-wrap">
+                        <div class="item-gallery"><img src="{{ post.get_image }}"></div>
+                    </div> <!-- slider-nav.// -->
+                </article> <!-- gallery-wrap .end// -->
+            </aside>
+            <aside class="col-sm-7">
+                <article class="p-5">
+                    <h3 class="title mb-3">{{ post.title|truncatechars:38 }}</h3>
+                    <div class="mb-3">
+                        <dl class="row">
+                            <dt class="col-sm-3">İlan Sahibi</dt>
+                            <dd class="col-sm-9">{{ post.author }}</dd>
+                            <dt class="col-sm-3">İlan Tarihi</dt>
+                            <dd class="col-sm-9">{{ post.created_date }}</dd>
+                            <dt class="col-sm-3">Fiyat</dt>
+                            <dd class="col-sm-9">9999</dd>
+                            <dt class="col-sm-3">Teslimat</dt>
+                            <dd class="col-sm-9">Elden veya Kargo</dd>
+                            <dt class="col-sm-3">Yer</dt>
+                            <dd class="col-sm-9">Ankara , Türkiye</dd>
+                        </dl>
+                    </div> <!-- price-detail-wrap .// -->
+                    <dl>
+                        <dt>Açıklama</dt>
+                        <dd><p>{{ post.content }}</p></dd>
+                    </dl>
+                    <dl class="row">
+                        <dt class="col-sm-3">Teslimat</dt>
+                        <dd class="col-sm-9">Elden veya Kargo</dd>
+                        <dt class="col-sm-3">Yer</dt>
+                        <dd class="col-sm-9">Ankara , Türkiye</dd>
+                    </dl>
+                    <div class="rating-wrap">
+                        <div class="label-rating">{{ post.author }}</div>
+                        <div class="label-rating">{{ post.created_date }}</div>
+                    </div> <!-- rating-wrap.// -->
+                </article> <!-- card-body.// -->
+            </aside> <!-- col.// -->
+        </div> <!-- row.// -->
+    </div> <!-- card.// -->
 
 {% endblock %}

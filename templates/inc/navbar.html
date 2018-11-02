@@ -16,31 +16,28 @@
                 <a class="nav-link" href="{% url 'product-ekle' %}">Ekle</a>
             </li>
             {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'user-profil' %}">Profil - {{ user.get_username }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'user-cikis' %}">Üye Çıkış</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        {{ user.get_username }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'user-profil' %}">Profil</a>
+                        <a class="dropdown-item" href="#">Yayınlarım (Yapım aşamasında)</a>
+                        <a class="dropdown-item" href="{% url 'user-cikis' %}">Çıkış</a>
+                    </div>
                 </li>
             {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'user-giris' %}">Üye Giriş</a>
+                    <a class="nav-link" href="{% url 'user-giris' %}">Giriş Yap</a>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link">|</span>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'user-kayit' %}">Kayıt Ol</a>
                 </li>
             {% endif %}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Dropdown link
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
         </ul>
     </div>
     <form class="form-inline">
