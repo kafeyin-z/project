@@ -23,7 +23,8 @@
         <div class="row">
             <div class="col-md-12">
                 {% for message in messages %}
-                    <div style="margin-bottom: 0rem;" class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">
+                    <div style="margin-bottom: 0rem;"
+                         class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">
                         {{ message }}
                     </div>
                 {% endfor %}
@@ -35,17 +36,21 @@
 
     {% endblock %}
 
-<div class="row">
-<div class="col-md-2">Kategori</div>
-    <div class="col-md-10 ml-auto">
-    {% block body %}
+    <div class="row">
+        <div class="col-md-2">Kategori</div>
+        <div class="col-md-10 ml-auto">
+            {% block body %}
 
-    {% endblock %}
-</div>
-</div>
+            {% endblock %}
+        </div>
+    </div>
 </div>
 <script type="text/javascript" src="{% static 'js/jquery-3.3.1.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/popper.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+
+{% block js %}
+
+{% endblock %}
 </body>
 </html>

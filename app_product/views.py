@@ -15,6 +15,10 @@ def ekle(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
+
+            # Tags save
+            form.save_m2m()
+
             messages.success(request, "İlanınız başarıyla oluşturuldu.")
             return HttpResponseRedirect(reverse('product-detay', kwargs={'pk': post.pk}))
     context = {'form': form}
@@ -44,6 +48,10 @@ def guncelle(request, pk):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
+
+            # Tags update
+            form.save_m2m()
+
             messages.success(request, "İlanınız başarıyla güncelleştirildi.")
             return HttpResponseRedirect(reverse('product-detay', kwargs={'pk': post.pk}))
     context = {'form': form}

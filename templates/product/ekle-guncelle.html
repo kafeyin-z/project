@@ -1,5 +1,10 @@
 {% extends 'layout.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'taggit_labels/css/taggit_labels.css' %}">
+{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -11,4 +16,8 @@
             </form>
         </div>
     </div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{% static 'taggit_labels/js/taggit_labels.js' %}"></script>
 {% endblock %}

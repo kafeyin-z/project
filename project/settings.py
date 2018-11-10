@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'django_extensions',
     'crispy_forms',
+    'taggit',
+    'taggit_labels',
     'app_product',
     'app_user',
 ]
